@@ -95,6 +95,68 @@ export function loadAllRecallArchiveResults() {
   return results;
 }
 
+// ── Sandwich storage ──────────────────────────────────────────────────────────
+const SANDWICH_KEY = "survivordle_sandwich_state";
+
+export function loadSandwichStorage() {
+  try { return JSON.parse(localStorage.getItem(SANDWICH_KEY)) || {}; }
+  catch { return {}; }
+}
+
+export function saveSandwichStorage(data) {
+  try { localStorage.setItem(SANDWICH_KEY, JSON.stringify(data)); }
+  catch {}
+}
+
+export function loadTodaySandwichGame(puzzleNum) {
+  const s = loadSandwichStorage();
+  if (s.puzzleNum === puzzleNum) return s;
+  return null;
+}
+
+export function saveSandwichMidGame({ puzzleNum, guesses }) {
+  const s = loadSandwichStorage();
+  saveSandwichStorage({ ...s, puzzleNum, guessObjects: guesses, gameOver: false });
+}
+
+export function saveSandwichCompletedGame({ puzzleNum, won, guessCount, guesses }) {
+  const s = loadSandwichStorage();
+  const stats = s.stats || { played: 0, wins: 0, currentStreak: 0, maxStreak: 0, dist: {} };
+  stats.played += 1;
+  if (won) {
+    stats.wins += 1;
+    stats.currentStreak += 1;
+    stats.maxStreak = Math.max(stats.maxStreak, stats.currentStreak);
+    stats.dist[guessCount] = (stats.dist[guessCount] || 0) + 1;
+  } else {
+    stats.currentStreak = 0;
+  }
+  saveSandwichStorage({ puzzleNum, won, guessCount, guessObjects: guesses, gameOver: true, stats });
+}
+
+export function loadSandwichStats() {
+  return loadSandwichStorage().stats || { played: 0, wins: 0, currentStreak: 0, maxStreak: 0, dist: {} };
+}
+
+const SANDWICH_UNLIMITED_KEY = "survivordle_sandwich_unlimited_stats";
+
+export function loadSandwichUnlimitedStats() {
+  try { return JSON.parse(localStorage.getItem(SANDWICH_UNLIMITED_KEY)) || { played: 0, wins: 0, dist: {} }; }
+  catch { return { played: 0, wins: 0, dist: {} }; }
+}
+
+export function saveSandwichUnlimitedGame({ won, guessCount }) {
+  const s = loadSandwichUnlimitedStats();
+  s.played += 1;
+  if (won) {
+    s.wins += 1;
+    s.dist[guessCount] = (s.dist[guessCount] || 0) + 1;
+  }
+  try { localStorage.setItem(SANDWICH_UNLIMITED_KEY, JSON.stringify(s)); }
+  catch {}
+  return s;
+}
+
 // ── Unlimited stats (localStorage, per device) ────────────────────────────────
 const UNLIMITED_KEY = "survivordle_unlimited_stats";
 

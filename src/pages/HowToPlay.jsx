@@ -363,6 +363,38 @@ export default function HowToPlay() {
           </div>
         </div>
 
+        {/* Sandwich Mode */}
+        <div className="htp-section">
+          <div className="htp-section-title">Sandwich Mode</div>
+          <p className="htp-body">
+            Sandwich 🥪 shows you two castaways from the same season — one placed just above the answer, one just below —
+            and you have <strong>4 guesses</strong> to name the castaway sandwiched between them.
+            Any season appearance of the right person counts.
+            Play at <a href="/sandwich" style={{ color: "var(--accent, #e17055)", textDecoration: "none" }}>/sandwich</a>.
+          </p>
+          <div className="htp-hint-block">
+            <div className="htp-hint-item">
+              <strong>Miss 1</strong>
+              The season and all three placement numbers are revealed.
+            </div>
+            <div className="htp-hint-item">
+              <strong>Miss 2</strong>
+              The answer's starting tribe and tribe color are revealed.
+            </div>
+            <div className="htp-hint-item">
+              <strong>Miss 3</strong>
+              The answer's age and gender are revealed.
+            </div>
+            <div className="htp-hint-item">
+              <strong>Miss 4</strong>
+              Game over — the answer is revealed.
+            </div>
+          </div>
+          <div className="htp-tip">
+            Sandwich has <strong>Daily</strong>, <strong>Archive</strong>, and <strong>Unlimited</strong> sub-modes — stats are tracked separately from the other games.
+          </div>
+        </div>
+
         <hr className="htp-divider" />
 
         <div className="htp-footer">

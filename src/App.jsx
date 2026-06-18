@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import CSS, { TAB_CSS, SUBTAB_CSS, PRIVACY_CSS, STATS_PAGE_CSS, ABOUT_CSS, FOOTER_CSS, RECALL_CSS } from "./shared/styles";
+import CSS, { TAB_CSS, SUBTAB_CSS, PRIVACY_CSS, STATS_PAGE_CSS, ABOUT_CSS, FOOTER_CSS, RECALL_CSS, SANDWICH_CSS } from "./shared/styles";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Ramp from "./components/RAMP";
@@ -15,6 +15,7 @@ import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Recall from "./pages/Recall";
+import Sandwich from "./pages/Sandwich";
 import { AnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_may22";
@@ -60,7 +61,7 @@ export default function App() {
   if (loading) return (
     <>
       <style>{CSS}</style>
-      <style>{TAB_CSS}{SUBTAB_CSS}{PRIVACY_CSS}{STATS_PAGE_CSS}{ABOUT_CSS}{FOOTER_CSS}{RECALL_CSS}</style>
+      <style>{TAB_CSS}{SUBTAB_CSS}{PRIVACY_CSS}{STATS_PAGE_CSS}{ABOUT_CSS}{FOOTER_CSS}{RECALL_CSS}{SANDWICH_CSS}</style>
       <div className="page"><div className="loading">🔥 Loading the tribe…</div></div>
     </>
   );
@@ -68,7 +69,7 @@ export default function App() {
   return (
     <>
       <style>{CSS}</style>
-      <style>{TAB_CSS}{SUBTAB_CSS}{PRIVACY_CSS}{STATS_PAGE_CSS}{ABOUT_CSS}{FOOTER_CSS}{RECALL_CSS}</style>
+      <style>{TAB_CSS}{SUBTAB_CSS}{PRIVACY_CSS}{STATS_PAGE_CSS}{ABOUT_CSS}{FOOTER_CSS}{RECALL_CSS}{SANDWICH_CSS}</style>
       <style>{lightMode ? "body{background:#f5f0e8}" : "body{background:#0a0a0a}"}</style>
       <div className={lightMode ? "light" : ""}>
 
@@ -97,6 +98,10 @@ export default function App() {
             <Route path="/recall/archive"   element={<Recall contestants={contestants} />} />
             <Route path="/recall/unlimited" element={<Recall contestants={contestants} />} />
             <Route path="/recall/stats"     element={<Recall contestants={contestants} />} />
+            <Route path="/sandwich"           element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
+            <Route path="/sandwich/archive"   element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
+            <Route path="/sandwich/unlimited" element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
+            <Route path="/sandwich/stats"     element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
           </Routes>
         </div>
 

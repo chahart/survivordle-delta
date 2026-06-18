@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "../shared/useSEO";
 import { fetchDailyStats, fetchGlobalStats } from "../shared/supabase";
-import { loadStorage, loadUnlimitedStats } from "../shared/storage";
+import { loadStorage, loadUnlimitedStats, loadSandwichStats, loadSandwichUnlimitedStats } from "../shared/storage";
 import { RecallStatsTab } from "../shared/recallStats";
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -40,6 +40,8 @@ function pct(count, total) {
 function MyStatsTab() {
   const daily    = loadStorage();
   const unlim    = loadUnlimitedStats();
+  const swDaily  = loadSandwichStats();
+  const swUnlim  = loadSandwichUnlimitedStats();
   const dStats   = daily.stats || { played: 0, wins: 0, currentStreak: 0, maxStreak: 0, dist: {} };
   const dPct     = dStats.played > 0 ? Math.round((dStats.wins / dStats.played) * 100) : 0;
   const dDist    = dStats.dist || {};
@@ -49,6 +51,14 @@ function MyStatsTab() {
   const uDist    = unlim.dist || {};
   const uMax     = Math.max(...Object.values(uDist).map(Number), 1);
   const uBest    = Object.entries(uDist).sort((a,b) => b[1]-a[1])[0]?.[0];
+  const swDPct   = swDaily.played > 0 ? Math.round((swDaily.wins / swDaily.played) * 100) : 0;
+  const swDDist  = swDaily.dist || {};
+  const swDMax   = Math.max(...Object.values(swDDist).map(Number), 1);
+  const swDBest  = Object.entries(swDDist).sort((a,b) => b[1]-a[1])[0]?.[0];
+  const swUPct   = swUnlim.played > 0 ? Math.round((swUnlim.wins / swUnlim.played) * 100) : 0;
+  const swUDist  = swUnlim.dist || {};
+  const swUMax   = Math.max(...Object.values(swUDist).map(Number), 1);
+  const swUBest  = Object.entries(swUDist).sort((a,b) => b[1]-a[1])[0]?.[0];
 
   return (
     <div className="stats-page-body">
@@ -128,7 +138,93 @@ function MyStatsTab() {
         </>
       )}
 
-      {dStats.played === 0 && unlim.played === 0 && (
+      <div className="stats-divider" />
+
+      {/* Sandwich Daily */}
+      <div className="sp-section-title">🥪 Sandwich Daily</div>
+      {swDaily.played === 0 ? (
+        <p style={{ textAlign:"center", color:"var(--text3)", fontSize:"13px", marginBottom:"16px" }}>No games yet</p>
+      ) : (
+        <>
+          <div className="stats-grid" style={{ marginBottom: "16px" }}>
+            {[
+              [swDaily.played,        "Played"],
+              [`${swDPct}%`,          "Solved"],
+              [swDaily.currentStreak, "Streak"],
+              [swDaily.maxStreak,     "Best Streak"],
+            ].map(([val, lbl]) => (
+              <div className="stats-grid-item" key={lbl}>
+                <span className="stats-grid-num">{val}</span>
+                <span className="stats-grid-label">{lbl}</span>
+              </div>
+            ))}
+          </div>
+          {swDaily.wins > 0 && (
+            <>
+              <div className="sp-sub-title">Guess Distribution</div>
+              {[1,2,3,4].map(n => {
+                const count = Number(swDDist[n] || 0);
+                const w = count > 0 ? `${Math.max(Math.round((count/swDMax)*100), 4)}%` : "0%";
+                return (
+                  <div key={n} className="stat-row">
+                    <span className="stat-label">{n}</span>
+                    <div className="stat-bar-wrap">
+                      <div className={`stat-bar${String(n)===String(swDBest)?" best":""}`} style={{ width: w }}>
+                        {count > 0 && <span className="stat-bar-count">{Math.round((count/swDaily.wins)*100)}%</span>}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </>
+      )}
+
+      <div className="stats-divider" />
+
+      {/* Sandwich Unlimited */}
+      <div className="sp-section-title">🥪 Sandwich Unlimited</div>
+      {swUnlim.played === 0 ? (
+        <p style={{ textAlign:"center", color:"var(--text3)", fontSize:"13px", marginBottom:"16px" }}>No games yet</p>
+      ) : (
+        <>
+          <div className="stats-grid" style={{ marginBottom: "16px" }}>
+            {[
+              [swUnlim.played, "Played"],
+              [`${swUPct}%`,   "Solved"],
+              [swUnlim.wins,   "Wins"],
+              [swUnlim.played - swUnlim.wins, "Losses"],
+            ].map(([val, lbl]) => (
+              <div className="stats-grid-item" key={lbl}>
+                <span className="stats-grid-num">{val}</span>
+                <span className="stats-grid-label">{lbl}</span>
+              </div>
+            ))}
+          </div>
+          {swUnlim.wins > 0 && (
+            <>
+              <div className="sp-sub-title">Guess Distribution</div>
+              {[1,2,3,4].map(n => {
+                const count = Number(swUDist[n] || 0);
+                const w = count > 0 ? `${Math.max(Math.round((count/swUMax)*100), 4)}%` : "0%";
+                return (
+                  <div key={n} className="stat-row">
+                    <span className="stat-label">{n}</span>
+                    <div className="stat-bar-wrap">
+                      <div className={`stat-bar${String(n)===String(swUBest)?" best":""}`} style={{ width: w }}>
+                        {count > 0 && <span className="stat-bar-count">{Math.round((count/swUnlim.wins)*100)}%</span>}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </>
+      )}
+
+      {dStats.played === 0 && unlim.played === 0 && swDaily.played === 0 && swUnlim.played === 0 && (
         <p style={{ textAlign:"center", color:"var(--text3)", marginTop:"40px" }}>
           Play some games to see your stats here!
         </p>

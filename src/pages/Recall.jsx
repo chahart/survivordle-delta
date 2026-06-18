@@ -188,6 +188,7 @@ function FlipResults({
   onShare, copied,
   mode, isDaily, onNavigateStats,
 }) {
+  const navigate = useNavigate();
   const ALL_FLIPPED = [true, true, true, true];
   const [flipped,      setFlipped]      = useState(skipAnimation ? ALL_FLIPPED : [false, false, false, false]);
   const [scoreVisible, setScoreVisible] = useState(skipAnimation);
@@ -273,6 +274,12 @@ function FlipResults({
               📊 Recall Stats
             </button>
           )}
+          <button className="share-btn" onClick={() => navigate("/sandwich")}>
+            🥪 Sandwich
+          </button>
+          <button className="share-btn" onClick={() => navigate("/")}>
+            🏠 Home
+          </button>
         </div>
         {isDaily && (
           <p style={{ textAlign: "center", color: "var(--text3)", fontSize: "13px" }}>

@@ -128,11 +128,16 @@ const CSS = `
     display: flex; align-items: center;
     border-top: 1px solid var(--nav-border);
   }
-  .nav-tabs { display: flex; align-items: center; gap: 0; }
+  .nav-tabs {
+    display: flex; align-items: center; gap: 0; min-width: 0;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
   .nav-tab {
     font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
     color: var(--text3); text-decoration: none; padding: 8px 14px;
     border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap;
+    flex-shrink: 0;
   }
   .nav-tab:hover { color: var(--text); }
   .nav-tab.active { color: #e8742a; border-bottom-color: #e8742a; }
@@ -174,7 +179,7 @@ const CSS = `
   @media (max-width: 500px) {
     .nav-secondary  { display: none; }
     .nav-more-wrap  { display: block; }
-    .nav-tab { padding: 8px 12px; font-size: 11px; }
+    .nav-tab { padding: 8px 10px; font-size: 10.5px; }
   }
 
   /* ── Page wrapper ── */
@@ -223,6 +228,15 @@ const CSS = `
   .torch-line { height: 1px; width: 72px; background: linear-gradient(90deg, transparent, #e8742a); }
   .torch-line.r { background: linear-gradient(90deg, #e8742a, transparent); }
   .tagline { color: var(--tagline); font-size: 12px; letter-spacing: 3.5px; text-transform: uppercase; }
+
+  @media (max-width: 500px) {
+    .header { margin-bottom: 16px; }
+    .logo { font-size: clamp(38px, 13vw, 52px); letter-spacing: 3px; }
+    .logo-torch { height: clamp(34px, 8vw, 42px); margin: 0 2px; }
+    .torch-row { margin: 4px 0 3px; }
+    .torch-line { width: 44px; }
+    .tagline { font-size: 10px; letter-spacing: 2px; }
+  }
 
   .loading { text-align: center; padding: 80px; color: var(--text3); font-size: 14px; letter-spacing: 2px; }
 
@@ -1008,6 +1022,52 @@ export const RECALL_CSS = `
     .rfc-guess-main { font-size: 22px; }
     .rfc-answer      { font-size: 20px; }
   }
+`;
+
+export const SANDWICH_CSS = `
+  .sw-card {
+    background: var(--tile-bg, rgba(255,255,255,0.04));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 16px;
+    text-align: center;
+    margin-bottom: 18px;
+    animation: slideIn 0.3s ease;
+  }
+  .sw-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--hint-label-c); margin-bottom: 6px;
+  }
+  .sw-sub-label {
+    font-size: 11px; color: var(--text4); margin-bottom: 14px; letter-spacing: 0.3px;
+  }
+  .sw-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing: 1px; color: var(--text2);
+    padding: 6px 0;
+  }
+  .sw-mystery {
+    font-size: 32px; color: #e8742a;
+    border-top: 1px dashed var(--border);
+    border-bottom: 1px dashed var(--border);
+    margin: 4px 0;
+  }
+  .sw-mystery.sw-revealed { animation: slideIn 0.3s ease; }
+  .sw-place {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: var(--text3); margin-left: 8px; letter-spacing: 0;
+  }
+  .sw-guesses { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; }
+  .sw-guess-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; border-radius: 8px; font-size: 14px;
+    animation: slideIn 0.28s ease;
+  }
+  .sw-guess-row.correct { background: #1a4d1a; border: 1px solid #4aaa4a; color: #b0ffb0; }
+  .sw-guess-row.wrong   { background: var(--cell-wrong-bg); border: 1px solid var(--cell-wrong-border); color: var(--cell-wrong-text); }
+  .sw-guess-num   { font-family: 'Bebas Neue', sans-serif; font-size: 16px; opacity: 0.6; }
+  .sw-guess-name  { flex: 1; font-weight: 600; text-align: left; }
+  .sw-guess-emoji { font-weight: 700; }
 `;
 
 export { TAB_CSS, SUBTAB_CSS, PRIVACY_CSS, STATS_PAGE_CSS, ABOUT_CSS, FOOTER_CSS };

@@ -70,6 +70,9 @@ export default function NavBar({ lightMode, onToggleLight, colorblind, onToggleC
           <NavLink to="/recall" className={() => `nav-tab${location.pathname.startsWith("/recall") ? " active" : ""}`}>
             Recall
           </NavLink>
+          <NavLink to="/sandwich" className={() => `nav-tab${location.pathname.startsWith("/sandwich") ? " active" : ""}`}>
+            Sandwich
+          </NavLink>
         </div>
 
         {/* Desktop: secondary links */}
