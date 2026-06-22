@@ -18,8 +18,9 @@ import Recall from "./pages/Recall";
 import Sandwich from "./pages/Sandwich";
 import { AnnouncementModal } from "./components/Modals";
 
-const BANNER_KEY = "survivordle_announcement_may22";
-const BANNER_EXPIRY = new Date("2026-05-22T12:00:00");
+const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
+const BANNER_START  = new Date("2026-06-23T14:00:00Z");
+const BANNER_EXPIRY = new Date("2026-06-24T14:00:00Z");
 
 const PUB_ID = import.meta.env.VITE_PLAYWIRE_PUB_ID;
 const WEBSITE_ID = import.meta.env.VITE_PLAYWIRE_WEBSITE_ID;
@@ -42,7 +43,7 @@ export default function App() {
   useEffect(() => {
     if (loading) return;
     const now = new Date();
-    if (!localStorage.getItem(BANNER_KEY) && now < BANNER_EXPIRY) {
+    if (!localStorage.getItem(BANNER_KEY) && now >= BANNER_START && now < BANNER_EXPIRY) {
       const timer = setTimeout(() => setShowAnnouncement(true), 500);
       return () => clearTimeout(timer);
     }
@@ -53,9 +54,9 @@ export default function App() {
     setShowAnnouncement(false);
   }
 
-  function goToRecall() {
+  function goToSandwich() {
     dismissAnnouncement();
-    navigate("/recall");
+    navigate("/sandwich");
   }
 
   if (loading) return (
@@ -110,7 +111,7 @@ export default function App() {
         {showAnnouncement && (
           <AnnouncementModal
             onClose={dismissAnnouncement}
-            onPlayRecall={goToRecall}
+            onPlaySandwich={goToSandwich}
           />
         )}
 
