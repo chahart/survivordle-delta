@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/bb",
+      "destination": "/bb2",
       "permanent": true,
       "has": [{"type": "host", "value": "bigbrotherdle.com"}]
     }
