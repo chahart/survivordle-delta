@@ -97,6 +97,102 @@ export async function logSandwichEvent({
   }
 }
 
+export async function logBBSolveEvent({ puzzle, guesses, hints, won, mode, firstGuess, secondGuess }) {
+  try {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    const h = now.getHours();
+    const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} `
+      + `${pad(h % 12 || 12)}:${pad(now.getMinutes())}${h < 12 ? "am" : "pm"}`;
+    const finalGuesses = won ? guesses : 9;
+    await fetch(`${SUPABASE_URL}/rest/v1/bb_solve_events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({
+        puzzle,
+        guesses: finalGuesses,
+        hints,
+        won,
+        mode,
+        timestamp,
+        first_guess: firstGuess || null,
+        second_guess: secondGuess || null,
+      }),
+    });
+  } catch {
+    // Fail silently — never disrupt gameplay
+  }
+}
+
+export async function logBBRecallEvent({
+  puzzle, mode,
+  guess_season, guess_placement, guess_age, guess_comp_wins,
+  pts_season, pts_placement, pts_age, pts_comp_wins,
+  score, grade,
+}) {
+  try {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    const h = now.getHours();
+    const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} `
+      + `${pad(h % 12 || 12)}:${pad(now.getMinutes())}${h < 12 ? "am" : "pm"}`;
+    await fetch(`${SUPABASE_URL}/rest/v1/bb_recall_events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({
+        puzzle, mode,
+        guess_season, guess_placement, guess_age, guess_comp_wins,
+        pts_season, pts_placement, pts_age, pts_comp_wins,
+        score, grade, timestamp,
+      }),
+    });
+  } catch {
+    // Fail silently — never disrupt gameplay
+  }
+}
+
+export async function logBBSandwichEvent({
+  puzzle, season, placedBefore, placedAfter,
+  guesses, won, mode, firstGuess, secondGuess,
+}) {
+  try {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    const h = now.getHours();
+    const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} `
+      + `${pad(h % 12 || 12)}:${pad(now.getMinutes())}${h < 12 ? "am" : "pm"}`;
+    await fetch(`${SUPABASE_URL}/rest/v1/bb_sandwich_events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({
+        puzzle, season,
+        placed_before: placedBefore,
+        placed_after: placedAfter,
+        guesses, won, mode, timestamp,
+        first_guess: firstGuess || null,
+        second_guess: secondGuess || null,
+      }),
+    });
+  } catch {
+    // Fail silently — never disrupt gameplay
+  }
+}
+
 export async function fetchUnlimitedStats() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_unlimited_stats`, {

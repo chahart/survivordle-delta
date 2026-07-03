@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { normalize } from "../shared/gameLogic";
 import { BB_SANDWICH_MAX_GUESSES, getBBNeighborPlacements } from "../shared/bbSandwichLogic";
+import { logBBSandwichEvent } from "../shared/supabase";
 
 const SANDWICH_SHARE_EMOJI = { correct: "🟩", wrong: "🟥" };
 
@@ -58,6 +59,17 @@ export default function BBSandwichGame({
   const neighbors = useMemo(() => getBBNeighborPlacements(contestants, answer), [contestants, answer]);
 
   function finish(newGuesses, didWin) {
+    logBBSandwichEvent({
+      puzzle: `${answer.name} - ${answer.seasonNameFull}`,
+      season: answer.season,
+      placedBefore: answer.placedBefore,
+      placedAfter: answer.placedAfter,
+      guesses: newGuesses.length,
+      won: didWin,
+      mode,
+      firstGuess: newGuesses[0] ? `${newGuesses[0].name} - ${newGuesses[0].seasonNameFull}` : null,
+      secondGuess: newGuesses[1] ? `${newGuesses[1].name} - ${newGuesses[1].seasonNameFull}` : null,
+    });
     onComplete?.({ won: didWin, guessCount: newGuesses.length, guesses: newGuesses });
   }
 

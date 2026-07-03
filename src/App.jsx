@@ -42,6 +42,25 @@ export default function App() {
   const isBB = location.pathname === "/bb" || location.pathname.startsWith("/bb/");
 
   useEffect(() => {
+    let link = document.querySelector('link[rel="icon"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "icon");
+      document.head.appendChild(link);
+    }
+    if (isBB) {
+      link.setAttribute("type", "image/svg+xml");
+      link.setAttribute(
+        "href",
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%81%3C/text%3E%3C/svg%3E"
+      );
+    } else {
+      link.setAttribute("type", "image/png");
+      link.setAttribute("href", "/favicon-32x32.png");
+    }
+  }, [isBB]);
+
+  useEffect(() => {
     fetch("/contestants.json")
       .then(r => r.json())
       .then(data => { setContestants(data); setLoading(false); })

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { evaluateBBGuess, BB_MAX_GUESSES, BB_COLUMNS } from "../shared/bbLogic";
 import { isWin, normalize } from "../shared/gameLogic";
 import { STATUS_EMOJI } from "../shared/constants";
-import { logSolveEvent } from "../shared/supabase";
+import { logBBSolveEvent } from "../shared/supabase";
 
 export default function BBGameBoard({
   answer,
@@ -72,7 +72,7 @@ export default function BBGameBoard({
     const fg = firstGuess || (newGuesses[0] ? `${newGuesses[0].name} - ${newGuesses[0].seasonNameFull}` : null);
     const sg = secondGuess || (newGuesses[1] ? `${newGuesses[1].name} - ${newGuesses[1].seasonNameFull}` : null);
 
-    logSolveEvent({
+    logBBSolveEvent({
       puzzle: `${answer.name} - ${answer.seasonNameFull}`,
       guesses: newGuesses.length,
       hints: hintEpisode || hintNeighbors,

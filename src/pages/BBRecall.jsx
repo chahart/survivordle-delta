@@ -4,6 +4,7 @@ import {
   saveBBRecallUnlimitedGame, loadAllBBRecallDailyResults, loadBBRecallUnlimitedHistory,
   loadBBRecallResult, saveBBRecallResult,
 } from "../shared/storage";
+import { logBBRecallEvent } from "../shared/supabase";
 import {
   scoreSeason, scorePlacement, scoreAge, scoreCompWins, getGrade,
   buildStintMap, pickRandom,
@@ -356,6 +357,20 @@ function BBRecallGame({ houseguest, stintMap, eligiblePool, onComplete, savedRes
     const cP  = scoreCompWins(Number(compWinsVal),   houseguest.COMP_wins);
     const tot = sP + plP + aP + cP;
     const g   = getGrade(tot);
+    logBBRecallEvent({
+      puzzle: `${houseguest.name} - ${houseguest.seasonNameFull}`,
+      mode,
+      guess_season:     Number(seasonVal),
+      guess_placement:  Number(placementVal),
+      guess_age:        Number(ageVal),
+      guess_comp_wins:  Number(compWinsVal),
+      pts_season:       sP,
+      pts_placement:    plP,
+      pts_age:          aP,
+      pts_comp_wins:    cP,
+      score:            tot,
+      grade:            g,
+    });
     onComplete({
       puzzle: `${houseguest.name} - ${houseguest.seasonNameFull}`,
       seasonVal, placementVal, ageVal, compWinsVal,
