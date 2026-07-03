@@ -1,18 +1,18 @@
 
 import { Link } from "react-router-dom";
 
-export default function Footer() {
+export default function Footer({ isBB }) {
   const year = new Date().getFullYear();
   return (
 <footer className="site-footer">
   <div className="site-footer-inner">
     <div className="footer-left">
-      <span className="footer-logo">SURV🔥VORDLE</span>
-      <span className="footer-copy">© {year} Survivordle. Not affiliated with CBS or Survivor.</span>
+      <span className={`footer-logo${isBB ? " bb" : ""}`}>{isBB ? "BIG BR👁THERDLE" : "SURV🔥VORDLE"}</span>
+      <span className="footer-copy">© {year} {isBB ? "Big Brotherdle. Not affiliated with CBS or Big Brother." : "Survivordle. Not affiliated with CBS or Survivor."}</span>
       <div className="footer-nav-links">
-        <Link to="/blog" className="footer-nav-link">Blog</Link>
-        <Link to="/faq" className="footer-nav-link">FAQ</Link>
-        <Link to="/about" className="footer-nav-link">About</Link>
+        {!isBB && <Link to="/blog" className="footer-nav-link">Blog</Link>}
+        {!isBB && <Link to="/faq" className="footer-nav-link">FAQ</Link>}
+        {!isBB && <Link to="/about" className="footer-nav-link">About</Link>}
         <Link to="/privacy" className="footer-nav-link">Privacy</Link>
       </div>
     </div>

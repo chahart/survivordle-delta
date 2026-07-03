@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import CSS, { TAB_CSS, SUBTAB_CSS, PRIVACY_CSS, STATS_PAGE_CSS, ABOUT_CSS, FOOTER_CSS, RECALL_CSS, SANDWICH_CSS } from "./shared/styles";
 import NavBar from "./components/NavBar";
+import BBNavBar from "./components/BBNavBar";
 import Footer from "./components/Footer";
 import Ramp from "./components/RAMP";
 import Daily from "./pages/Daily";
@@ -17,6 +18,8 @@ import BlogPost from "./pages/BlogPost";
 import Recall from "./pages/Recall";
 import Sandwich from "./pages/Sandwich";
 import BB from "./pages/BB";
+import BBRecall from "./pages/BBRecall";
+import BBSandwich from "./pages/BBSandwich";
 import { AnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
@@ -33,6 +36,8 @@ export default function App() {
   const [colorblind,       setColorblind]       = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isBB = location.pathname === "/bb" || location.pathname.startsWith("/bb/");
 
   useEffect(() => {
     fetch("/contestants.json")
@@ -77,12 +82,21 @@ export default function App() {
 
         <Ramp PUB_ID={PUB_ID} WEBSITE_ID={WEBSITE_ID} />
 
-        <NavBar
-          lightMode={lightMode}
-          onToggleLight={() => setLightMode(m => !m)}
-          colorblind={colorblind}
-          onToggleColorblind={() => setColorblind(m => !m)}
-        />
+        {isBB ? (
+          <BBNavBar
+            lightMode={lightMode}
+            onToggleLight={() => setLightMode(m => !m)}
+            colorblind={colorblind}
+            onToggleColorblind={() => setColorblind(m => !m)}
+          />
+        ) : (
+          <NavBar
+            lightMode={lightMode}
+            onToggleLight={() => setLightMode(m => !m)}
+            colorblind={colorblind}
+            onToggleColorblind={() => setColorblind(m => !m)}
+          />
+        )}
 
         <div className="page">
           <Routes>
@@ -104,11 +118,22 @@ export default function App() {
             <Route path="/sandwich/archive"   element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
             <Route path="/sandwich/unlimited" element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
             <Route path="/sandwich/stats"     element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
-            <Route path="/bb"                 element={<BB />} />
+            <Route path="/bb"           element={<BB colorblind={colorblind} />} />
+            <Route path="/bb/archive"   element={<BB colorblind={colorblind} />} />
+            <Route path="/bb/unlimited" element={<BB colorblind={colorblind} />} />
+            <Route path="/bb/stats"     element={<BB colorblind={colorblind} />} />
+            <Route path="/bb/recall"           element={<BBRecall colorblind={colorblind} />} />
+            <Route path="/bb/recall/archive"   element={<BBRecall colorblind={colorblind} />} />
+            <Route path="/bb/recall/unlimited" element={<BBRecall colorblind={colorblind} />} />
+            <Route path="/bb/recall/stats"     element={<BBRecall colorblind={colorblind} />} />
+            <Route path="/bb/sandwich"           element={<BBSandwich colorblind={colorblind} />} />
+            <Route path="/bb/sandwich/archive"   element={<BBSandwich colorblind={colorblind} />} />
+            <Route path="/bb/sandwich/unlimited" element={<BBSandwich colorblind={colorblind} />} />
+            <Route path="/bb/sandwich/stats"     element={<BBSandwich colorblind={colorblind} />} />
           </Routes>
         </div>
 
-        <Footer />
+        <Footer isBB={isBB} />
 
         {showAnnouncement && (
           <AnnouncementModal

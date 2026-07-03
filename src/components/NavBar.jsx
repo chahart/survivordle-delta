@@ -58,6 +58,9 @@ export default function NavBar({ lightMode, onToggleLight, colorblind, onToggleC
       {/* Row 2: page tabs + secondary */}
       <div className="nav-row2">
         <div className="nav-tabs">
+          <NavLink to="/bb" className="nav-tab nav-tab-gateway gateway-bb" title="Go to Big Brotherdle">
+            BIG BR<span className="gateway-eye">👁</span>THERDLE
+          </NavLink>
           <NavLink to="/" end className={({ isActive }) => `nav-tab${isActive ? " active" : ""}`}>
             Daily
           </NavLink>

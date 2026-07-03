@@ -141,6 +141,15 @@ const CSS = `
   }
   .nav-tab:hover { color: var(--text); }
   .nav-tab.active { color: #e8742a; border-bottom-color: #e8742a; }
+  .nav-tab-gateway {
+    font-family: 'Bebas Neue', sans-serif; font-weight: 400; letter-spacing: 1.5px;
+    border-right: 1px solid var(--nav-border); margin-right: 4px;
+  }
+  .nav-tab-gateway.gateway-bb { color: #5aaedd; }
+  .nav-tab-gateway.gateway-bb:hover { color: #b8e4f5; }
+  .nav-tab-gateway.gateway-surv { color: #e8742a; }
+  .nav-tab-gateway.gateway-surv:hover { color: #f7c66a; }
+  .gateway-eye { margin: 0 0.04em; }
   .nav-secondary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
   .nav-secondary-link {
     font-size: 11px; color: var(--text3); text-decoration: none;
@@ -180,6 +189,14 @@ const CSS = `
     .nav-secondary  { display: none; }
     .nav-more-wrap  { display: block; }
     .nav-tab { padding: 8px 10px; font-size: 10.5px; }
+  }
+
+  @media (max-width: 420px) {
+    .nav-row1 { gap: 6px; padding: 0 10px; }
+    .nav-logo, .bb-nav-logo { font-size: 17px; letter-spacing: 1.5px; }
+    .nav-right { gap: 4px; }
+    .nav-btn { width: 28px; height: 28px; }
+    .nav-tab-gateway { padding: 8px 10px; }
   }
 
   /* ── Page wrapper ── */
@@ -710,6 +727,10 @@ const FOOTER_CSS = `
   .footer-logo {
     font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px;
     background: linear-gradient(to right, #e8742a, #f7c66a);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .footer-logo.bb {
+    background: linear-gradient(to right, #1a6fbf, #5aaedd, #b8e4f5);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
   .footer-copy {
