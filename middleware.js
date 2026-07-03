@@ -58,6 +58,9 @@ export default async function middleware(request) {
 
   return new Response(html, {
     status: 200,
-    headers: { "content-type": "text/html; charset=utf-8" },
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      "x-bb-middleware": "hit", // TEMP: remove once /bb OG rewrite is confirmed live
+    },
   });
 }
