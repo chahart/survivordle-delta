@@ -20,6 +20,8 @@ import Sandwich from "./pages/Sandwich";
 import BB from "./pages/BB";
 import BBRecall from "./pages/BBRecall";
 import BBSandwich from "./pages/BBSandwich";
+import BBHowToPlay from "./pages/BBHowToPlay";
+import BBFAQ from "./pages/BBFAQ";
 import { AnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
@@ -130,6 +132,8 @@ export default function App() {
             <Route path="/bb/sandwich/archive"   element={<BBSandwich colorblind={colorblind} />} />
             <Route path="/bb/sandwich/unlimited" element={<BBSandwich colorblind={colorblind} />} />
             <Route path="/bb/sandwich/stats"     element={<BBSandwich colorblind={colorblind} />} />
+            <Route path="/bb/how-to-play" element={<BBHowToPlay />} />
+            <Route path="/bb/faq"         element={<BBFAQ />} />
           </Routes>
         </div>
 

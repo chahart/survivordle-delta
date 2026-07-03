@@ -1,8 +1,8 @@
 import useSEO from "../shared/useSEO";
 export default function Privacy() {
   useSEO({
-    title: "Privacy Policy | Survivordle",
-    description: "Survivordle privacy policy. Learn what data we collect and how it is used.",
+    title: "Privacy Policy | Survivordle & Big Brotherdle",
+    description: "Privacy policy for Survivordle and Big Brotherdle. Learn what data we collect and how it is used.",
     canonical: "https://survivordle.com/privacy",
   });
   return (
@@ -21,7 +21,7 @@ export default function Privacy() {
           <div className="torch-line" />
           <div className="torch-line r" />
         </div>
-        <div className="tagline">Privacy Policy</div>
+        <div className="tagline">Privacy Policy &nbsp;·&nbsp; Covers Survivordle &amp; Big Brotherdle</div>
       </header>
 
       <div className="privacy-body">
@@ -30,9 +30,10 @@ export default function Privacy() {
         <section className="privacy-section">
           <h2 className="privacy-heading">Overview</h2>
           <p>
-            Survivordle is a free daily puzzle game. We are committed to being transparent about
-            the limited data we collect. We do not collect any personally identifiable information.
-            We do not sell data to third parties.
+            Survivordle and Big Brotherdle are free daily puzzle games, run by the same team on the
+            same site. We are committed to being transparent about the limited data we collect.
+            We do not collect any personally identifiable information. We do not sell data to
+            third parties.
           </p>
         </section>
 
@@ -42,11 +43,11 @@ export default function Privacy() {
             When you complete a game, we anonymously log the following:
           </p>
           <ul className="privacy-list">
-            <li>The castaway that was guessed</li>
+            <li>The castaway or houseguest that was guessed</li>
             <li>Number of guesses used</li>
             <li>Whether the puzzle was solved or not</li>
             <li>Whether hints were used</li>
-            <li>Game mode (Daily, Archive, or Unlimited)</li>
+            <li>Game mode (Daily, Archive, or Unlimited) and which game (Survivordle or Big Brotherdle, and Recall/Sandwich where applicable)</li>
             <li>Approximate time of play</li>
           </ul>
           <p>
@@ -58,7 +59,7 @@ export default function Privacy() {
         <section className="privacy-section">
           <h2 className="privacy-heading">Local Storage</h2>
           <p>
-            Survivordle stores your game progress, streak, and statistics locally in your browser
+            Both games store your progress, streak, and statistics locally in your browser
             using localStorage. This data never leaves your device and is not accessible to us.
             You can clear it at any time by clearing your browser's site data.
           </p>
@@ -96,7 +97,7 @@ export default function Privacy() {
 
         <section className="privacy-section">
           <h2 className="privacy-heading">Third-Party Services</h2>
-          <p>The following third-party services are used by Survivordle:</p>
+          <p>The following third-party services are used by Survivordle and Big Brotherdle:</p>
           <ul className="privacy-list">
             <li><strong>Supabase</strong>: anonymous game event storage (<a className="privacy-link" href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>)</li>
             <li><strong>Vercel</strong>: hosting and performance analytics (<a className="privacy-link" href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">privacy policy</a>)</li>
@@ -107,8 +108,8 @@ export default function Privacy() {
         <section className="privacy-section">
           <h2 className="privacy-heading">Children's Privacy</h2>
           <p>
-            Survivordle does not knowingly collect any information from children under the age of 13.
-            The game contains no age-restricted content.
+            Neither game knowingly collects any information from children under the age of 13.
+            Neither game contains age-restricted content.
           </p>
         </section>
 

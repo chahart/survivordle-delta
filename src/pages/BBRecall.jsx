@@ -45,6 +45,45 @@ const BB_HEADER_CSS = `
     vertical-align: middle;
   }
   .bb-header { text-align: center; margin-bottom: 4px; }
+
+  /* Recolor Survivordle-orange brand accents to BB blue on this page.
+     Semantic colors (correct/close/wrong) are left untouched. */
+  .bb-theme .ul-tab.active,
+  .bb-theme .ul-subtab.active,
+  .bb-theme .mode-banner-title,
+  .bb-theme .archive-item-num,
+  .bb-theme .stats-grid-num,
+  .bb-theme .status-name,
+  .bb-theme .recall-castaway-name,
+  .bb-theme .recall-info-heading {
+    color: #5aaedd;
+  }
+  .bb-theme .ul-subtab.active {
+    background: #5aaedd22;
+    border-color: #5aaedd;
+  }
+  .bb-theme .share-btn:hover,
+  .bb-theme .recall-again-btn:hover,
+  .bb-theme .recall-info-btn:hover {
+    border-color: #5aaedd;
+    color: #5aaedd;
+  }
+  .bb-theme .recall-info-btn:hover {
+    background: rgba(90,174,221,0.08);
+  }
+  .bb-theme .recall-input:focus,
+  .bb-theme .recall-select-wrap:focus-within {
+    border-color: #5aaedd;
+  }
+  .bb-theme .recall-submit-btn {
+    background: linear-gradient(135deg, #1a6fbf, #5aaedd);
+  }
+  .bb-theme .stat-bar {
+    background: linear-gradient(90deg, #1a6fbf, #5aaedd);
+  }
+  .bb-theme .archive-play-btn {
+    background: linear-gradient(135deg, #1a6fbf, #5aaedd);
+  }
 `;
 
 // ── Shared helpers ─────────────────────────────────────────────────────────────
@@ -775,6 +814,9 @@ function BBRecallInfoPopover() {
               <span className="recall-info-pts">8 pts if exact, 4 pts if within 2, 0 pts otherwise</span>
             </div>
           </div>
+          <p className="recall-info-body" style={{ marginTop: "12px", marginBottom: 0, fontSize: "12px" }}>
+            <strong>Seasons included:</strong> Big Brother 1–27 only. No Celebrity Big Brother, Reindeer Games, or Over the Top.
+          </p>
         </div>
       )}
     </div>
@@ -810,14 +852,14 @@ export default function BBRecall({ colorblind }) {
                   : "daily";
 
   if (loading) return (
-    <>
+    <div className="bb-theme">
       <style>{BB_HEADER_CSS}</style>
       <div className="loading">👁 Loading…</div>
-    </>
+    </div>
   );
 
   return (
-    <>
+    <div className="bb-theme">
       <style>{BB_HEADER_CSS}</style>
       <header className="header bb-header">
         <div className="bb-title">
@@ -848,6 +890,6 @@ export default function BBRecall({ colorblind }) {
       {activeTab === "archive"   && <BBRecallArchive   stintMap={stintMap} eligiblePool={houseguests} onNavigateStats={() => navigate("/bb/recall/stats")} />}
       {activeTab === "unlimited" && <BBRecallUnlimited stintMap={stintMap} eligiblePool={houseguests} onNavigateStats={() => navigate("/bb/recall/stats")} />}
       {activeTab === "stats"     && <BBRecallInlineStats />}
-    </>
+    </div>
   );
 }

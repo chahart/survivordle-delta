@@ -471,6 +471,9 @@ function BBInfoPopover() {
               <span className="recall-info-pts">🟧 if within 5 years</span>
             </div>
           </div>
+          <p className="recall-info-body" style={{ marginTop: "12px", marginBottom: 0, fontSize: "12px" }}>
+            <strong>Seasons included:</strong> Big Brother 1–27 only. No Celebrity Big Brother, Reindeer Games, or Over the Top.
+          </p>
         </div>
       )}
     </div>

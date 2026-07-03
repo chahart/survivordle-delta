@@ -45,6 +45,32 @@ const BB_HEADER_CSS = `
     vertical-align: middle;
   }
   .bb-header { text-align: center; margin-bottom: 4px; }
+
+  /* Recolor Survivordle-orange brand accents to BB blue on this page.
+     Semantic colors (correct/close/wrong) are left untouched. */
+  .bb-theme .ul-tab.active,
+  .bb-theme .mode-banner-title,
+  .bb-theme .archive-item-num,
+  .bb-theme .stats-grid-num,
+  .bb-theme .status-name,
+  .bb-theme .sw-mystery,
+  .bb-theme .recall-info-heading {
+    color: #5aaedd;
+  }
+  .bb-theme .share-btn:hover,
+  .bb-theme .recall-info-btn:hover {
+    border-color: #5aaedd;
+    color: #5aaedd;
+  }
+  .bb-theme .recall-info-btn:hover {
+    background: rgba(90,174,221,0.08);
+  }
+  .bb-theme .stat-bar {
+    background: linear-gradient(90deg, #1a6fbf, #5aaedd);
+  }
+  .bb-theme .archive-play-btn {
+    background: linear-gradient(135deg, #1a6fbf, #5aaedd);
+  }
 `;
 
 // ── Daily mode ─────────────────────────────────────────────────────────────────
@@ -328,6 +354,9 @@ function BBSandwichInfoPopover() {
               <span className="recall-info-pts">Game over — answer revealed</span>
             </div>
           </div>
+          <p className="recall-info-body" style={{ marginTop: "12px", marginBottom: 0, fontSize: "12px" }}>
+            <strong>Seasons included:</strong> Big Brother 1–27 only. No Celebrity Big Brother, Reindeer Games, or Over the Top.
+          </p>
         </div>
       )}
     </div>
@@ -361,14 +390,14 @@ export default function BBSandwich({ colorblind }) {
                   : "daily";
 
   if (loading) return (
-    <>
+    <div className="bb-theme">
       <style>{BB_HEADER_CSS}</style>
       <div className="loading">🥪 Loading the sandwich…</div>
-    </>
+    </div>
   );
 
   return (
-    <>
+    <div className="bb-theme">
       <style>{BB_HEADER_CSS}</style>
       <header className="header bb-header">
         <div className="bb-title">
@@ -399,6 +428,6 @@ export default function BBSandwich({ colorblind }) {
       {activeTab === "archive"   && <BBSandwichArchive   contestants={houseguests} colorblind={colorblind} />}
       {activeTab === "unlimited" && <BBSandwichUnlimited contestants={houseguests} colorblind={colorblind} />}
       {activeTab === "stats"     && <BBSandwichStats />}
-    </>
+    </div>
   );
 }
