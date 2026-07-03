@@ -4,12 +4,15 @@ export const config = {
 
 const BB_TITLE = "Big Brotherdle: Daily Big Brother Houseguest Guessing Game";
 const BB_DESCRIPTION = "Guess the Big Brother houseguest in 8 tries. New puzzle every day: match by season, comp wins, placement, age, and more.";
-const BB_IMAGE = "https://survivordle.com/Big_Brotherdle_Thumbnail.png";
 
 export default async function middleware(request) {
   const url = new URL(request.url);
   const isBB = url.pathname === "/bb" || url.pathname.startsWith("/bb/");
   if (!isBB) return;
+
+  // og:url/canonical intentionally stay pinned to the production domain (SEO identity).
+  // og:image must use the requesting host so crawlers can actually fetch it on preview deployments.
+  const BB_IMAGE = `${url.origin}/Big_Brotherdle_Thumbnail.png`;
 
   const response = await fetch(new URL("/index.html", url));
   let html = await response.text();
