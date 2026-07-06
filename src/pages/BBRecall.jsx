@@ -826,7 +826,7 @@ function BBRecallInfoPopover() {
             </div>
             <div className="recall-info-score-row">
               <span className="recall-info-field">Comp Wins</span>
-              <span className="recall-info-pts">8 pts if exact, 4 pts if within 2, 0 pts otherwise</span>
+              <span className="recall-info-pts">8 pts if within 1, 4 pts if within 2, 0 pts otherwise</span>
             </div>
           </div>
           <p className="recall-info-body" style={{ marginTop: "12px", marginBottom: 0, fontSize: "12px" }}>

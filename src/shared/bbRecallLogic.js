@@ -21,7 +21,7 @@ export function scoreAge(guess, answer) {
 
 export function scoreCompWins(guess, answer) {
   const diff = Math.abs(guess - answer);
-  if (diff === 0) return 8;
+  if (diff <= 1)  return 8;
   if (diff <= 2)  return 4;
   return 0;
 }

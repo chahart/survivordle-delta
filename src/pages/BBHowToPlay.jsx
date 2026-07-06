@@ -352,7 +352,7 @@ export default function BBHowToPlay() {
             </div>
             <div className="htp-col-row">
               <span className="htp-col-name">Comp Wins</span>
-              <span className="htp-col-desc">Up to 8 pts. Exact match = 8, within ±2 = 4, otherwise = 0.</span>
+              <span className="htp-col-desc">Up to 8 pts. Within ±1 = 8 · within ±2 = 4 · otherwise = 0.</span>
             </div>
           </div>
           <div className="htp-tip">
