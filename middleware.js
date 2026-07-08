@@ -3,7 +3,7 @@ export const config = {
 };
 
 const BB_TITLE = "Big Brotherdle: Daily Big Brother Houseguest Guessing Game";
-const BB_DESCRIPTION = "Guess the Big Brother houseguest in 8 tries. New puzzle every day: match by season, comp wins, placement, age, and more.";
+const BB_DESCRIPTION = "Guess the Big Brother houseguest in 8 tries. New puzzle every day: match by season, comp wins, placement, age, and more!";
 
 export default async function middleware(request) {
   const url = new URL(request.url);
