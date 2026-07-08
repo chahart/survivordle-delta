@@ -2355,7 +2355,7 @@
  },
  {
    "id": "US0668_45",
-   "castaway_id": "US0676",
+   "castaway_id": "US0668",
    "name": "Emily Flippen",
    "season": 45,
    "seasonName": "45",
@@ -4174,7 +4174,7 @@
    "day": 14,
    "result": "6th voted out",
    "juryTier": "Jury",
-   "placedBefore": "Parvati Shallow",
+   "placedBefore": "Sandra Diaz-Twine",
    "placedAfter": "Ethan Zohn",
    "showName": "Boston Rob",
    "tribe_color": "Blue/Teal"
@@ -4196,7 +4196,7 @@
    "day": 16,
    "result": "8th voted out; Quit EoE",
    "juryTier": "Non-Jury",
-   "placedBefore": "Yul Kwon",
+   "placedBefore": "Parvati Shallow",
    "placedAfter": "Rob Mariano",
    "showName": "Sandra",
    "tribe_color": "Red"
@@ -4218,8 +4218,8 @@
    "day": 16,
    "result": "7th voted out",
    "juryTier": "Jury",
-   "placedBefore": "Sandra Diaz-Twine",
-   "placedAfter": "Parvati Shallow",
+   "placedBefore": "Yul Kwon",
+   "placedAfter": "Sandra Diaz-Twine",
    "showName": "Parvati",
    "tribe_color": "Blue/Teal"
  },
@@ -4241,7 +4241,7 @@
    "result": "9th voted out",
    "juryTier": "Jury",
    "placedBefore": "Wendell Holland",
-   "placedAfter": "Yul Kwon",
+   "placedAfter": "Parvati Shallow",
    "showName": "Yul",
    "tribe_color": "Red"
  },
@@ -4263,7 +4263,7 @@
    "result": "10th voted out",
    "juryTier": "Jury",
    "placedBefore": "Adam Klein",
-   "placedAfter": "Sandra Diaz-Twine",
+   "placedAfter": "Yul Kwon",
    "showName": "Wendell",
    "tribe_color": "Red"
  },
@@ -17046,7 +17046,7 @@
    "juryTier": "Non-Jury",
    "placedBefore": "Lisa Keiffer",
    "placedAfter": "Brady Finta",
-   "showName": "Bubba",
+   "showName": "Travis",
    "tribe_color": "Red"
  },
  {
@@ -19004,7 +19004,7 @@
    "juryTier": "Jury",
    "placedBefore": "Sean Rector",
    "placedAfter": "Tammy Leitner",
-   "showName": "General",
+   "showName": "Robert",
    "tribe_color": "Blue/Teal"
  },
  {
