@@ -23,6 +23,29 @@ export function AnnouncementModal({ onClose, onPlaySandwich }) {
   );
 }
 
+export function BBAnnouncementModal({ onClose, onPlayBB }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <h2 className="modal-title">What's New</h2>
+
+        <div className="modal-section-title">Introducing... Big Brotherdle! 👁</div>
+        <p className="modal-body">
+          A new daily game for Big Brother fans, in the same place as Survivordle. Guess the houseguest in 8 guesses! Match season, placement, comp wins, and more. Good luck!
+        </p>
+        <p className="modal-body">
+          Play the daily puzzle, dive into the archive, or go unlimited for endless practice. Recall and Sandwich modes also available.
+        </p>
+
+        <button className="play-recall-btn" onClick={onPlayBB}>
+          Play Big Brotherdle →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function HowToPlayModal({ onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>

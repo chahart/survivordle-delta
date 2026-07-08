@@ -22,11 +22,15 @@ import BBRecall from "./pages/BBRecall";
 import BBSandwich from "./pages/BBSandwich";
 import BBHowToPlay from "./pages/BBHowToPlay";
 import BBFAQ from "./pages/BBFAQ";
-import { AnnouncementModal } from "./components/Modals";
+import { AnnouncementModal, BBAnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
 const BANNER_START  = new Date("2026-06-23T14:00:00Z");
 const BANNER_EXPIRY = new Date("2026-06-24T14:00:00Z");
+
+const BB_BANNER_KEY = "survivordle_announcement_bb_promo_jul08";
+const BB_BANNER_START  = new Date("2026-07-08T12:00:00Z"); // Wed Jul 8, 8am ET
+const BB_BANNER_EXPIRY = new Date("2026-07-15T12:00:00Z"); // one week later
 
 const PUB_ID = import.meta.env.VITE_PLAYWIRE_PUB_ID;
 const WEBSITE_ID = import.meta.env.VITE_PLAYWIRE_WEBSITE_ID;
@@ -37,6 +41,7 @@ export default function App() {
   const [lightMode,        setLightMode]        = useState(false);
   const [colorblind,       setColorblind]       = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [showBBAnnouncement, setShowBBAnnouncement] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isBB = location.pathname === "/bb" || location.pathname.startsWith("/bb/");
@@ -76,6 +81,15 @@ export default function App() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if (loading || isBB) return;
+    const now = new Date();
+    if (!localStorage.getItem(BB_BANNER_KEY) && now >= BB_BANNER_START && now < BB_BANNER_EXPIRY) {
+      const timer = setTimeout(() => setShowBBAnnouncement(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, isBB]);
+
   function dismissAnnouncement() {
     localStorage.setItem(BANNER_KEY, "1");
     setShowAnnouncement(false);
@@ -84,6 +98,16 @@ export default function App() {
   function goToSandwich() {
     dismissAnnouncement();
     navigate("/sandwich");
+  }
+
+  function dismissBBAnnouncement() {
+    localStorage.setItem(BB_BANNER_KEY, "1");
+    setShowBBAnnouncement(false);
+  }
+
+  function goToBB() {
+    dismissBBAnnouncement();
+    navigate("/bb");
   }
 
   if (loading) return (
@@ -158,12 +182,17 @@ export default function App() {
 
         <Footer isBB={isBB} />
 
-        {showAnnouncement && (
+        {showAnnouncement ? (
           <AnnouncementModal
             onClose={dismissAnnouncement}
             onPlaySandwich={goToSandwich}
           />
-        )}
+        ) : showBBAnnouncement && !isBB ? (
+          <BBAnnouncementModal
+            onClose={dismissBBAnnouncement}
+            onPlayBB={goToBB}
+          />
+        ) : null}
 
       </div>
     </>
