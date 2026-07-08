@@ -15,6 +15,7 @@ export default function BBSandwichGame({
   onMidGame,
   onNavigateStats,
   onNavigateDaily,
+  onNavigateRecall,
   initialGuesses,
   initialGameOver,
   initialWon,
@@ -245,7 +246,12 @@ export default function BBSandwichGame({
             )}
             {onNavigateDaily && (
               <button className="share-btn" onClick={onNavigateDaily}>
-                {mode === "bb_sandwich_unlimited" ? "👁 Daily" : "🥪 Daily"}
+                {mode === "bb_sandwich_archive" ? "🥪 Daily" : "👁 Daily"}
+              </button>
+            )}
+            {onNavigateRecall && (
+              <button className="share-btn" onClick={onNavigateRecall}>
+                🔑 Recall
               </button>
             )}
           </div>

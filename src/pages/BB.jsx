@@ -232,6 +232,9 @@ function BBDaily({ contestants, colorblind }) {
         contestants={contestants}
         onMidGame={handleMidGame}
         onNavigateStats={() => navigate("/bb/stats")}
+        onNavigateRecall={() => navigate("/bb/recall")}
+        onNavigateSandwich={() => navigate("/bb/sandwich")}
+        onNavigateHome={() => navigate("/")}
         onComplete={handleComplete}
         colorblind={colorblind}
         initialGuesses={saved?.guessObjects   || []}
@@ -490,6 +493,7 @@ export default function BB({ colorblind }) {
     title: "Big Brotherdle: Daily Big Brother Houseguest Puzzle",
     description: "Guess today's Big Brother houseguest in 8 tries. A new puzzle every day. Test your Big Brother knowledge!",
     canonical: "https://survivordle.com/bb",
+    image: "https://survivordle.com/Big_Brotherdle_Thumbnail.png",
   });
 
   useEffect(() => {

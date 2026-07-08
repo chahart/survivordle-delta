@@ -114,6 +114,8 @@ function BBSandwichDaily({ contestants, colorblind }) {
         onMidGame={handleMidGame}
         onComplete={handleComplete}
         onNavigateStats={() => navigate("/bb/sandwich/stats")}
+        onNavigateDaily={() => navigate("/bb")}
+        onNavigateRecall={() => navigate("/bb/recall")}
         initialGuesses={saved?.guessObjects || []}
         initialGameOver={saved?.gameOver    || false}
         initialWon={saved?.won              || false}
@@ -374,6 +376,7 @@ export default function BBSandwich({ colorblind }) {
     title: "Big Brotherdle Sandwich: Guess Who Placed Between",
     description: "Two houseguests, one mystery between them. Guess the Big Brother houseguest sandwiched between two placements in 4 tries.",
     canonical: "https://survivordle.com/bb/sandwich",
+    image: "https://survivordle.com/Big_Brotherdle_Thumbnail.png",
   });
 
   useEffect(() => {

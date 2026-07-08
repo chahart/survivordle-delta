@@ -5,6 +5,12 @@
       "destination": "/bb",
       "permanent": true,
       "has": [{"type": "host", "value": "bigbrotherdle.com"}]
+    },
+    {
+      "source": "/:path*",
+      "destination": "/bb/:path*",
+      "permanent": true,
+      "has": [{"type": "host", "value": "bigbrotherdle.com"}]
     }
   ],
   "rewrites": [

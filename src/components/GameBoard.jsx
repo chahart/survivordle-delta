@@ -40,6 +40,7 @@ export default function GameBoard({
   onNavigateStats,
   onNavigateRecall,
   onNavigateSandwich,
+  onNavigateBB,
   colorblind,
   onMidGame,
   initialHintEpisode,
@@ -342,6 +343,11 @@ export default function GameBoard({
             {onNavigateSandwich && (
               <button className="share-btn" onClick={onNavigateSandwich}>
                 🥪 Sandwich
+              </button>
+            )}
+            {onNavigateBB && (
+              <button className="share-btn" onClick={onNavigateBB}>
+                👁 Big Brotherdle
               </button>
             )}
           </div>

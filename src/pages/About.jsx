@@ -30,6 +30,14 @@ export default function About() {
       <div className="about-page">
 
         <section className="about-section">
+          <p className="about-body">
+            Also a Big Brother fan? Check out <Link to="/bb" className="about-link">Bigbrotherdle 👁</Link>, the Big Brother houseguest guessing game from the same creator.
+          </p>
+        </section>
+
+        <div className="about-divider" />
+
+        <section className="about-section">
           <h2 className="about-heading">What is Survivordle?</h2>
           <p className="about-body">
             Survivordle is a free daily guessing game for fans of the TV show Survivor. Every day at midnight ET, a new castaway is selected from the full cast history of the show — spanning every season from Survivor: Borneo all the way through the most recent season. Your goal is to identify who that castaway is in 8 guesses or fewer.

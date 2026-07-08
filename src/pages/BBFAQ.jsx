@@ -326,6 +326,7 @@ export default function BBFAQ() {
     title: "FAQ | Big Brotherdle",
     description: "Frequently asked questions about Big Brotherdle, the daily Big Brother houseguest guessing game. Get answers about gameplay, scoring, streaks, and more.",
     canonical: "https://survivordle.com/bb/faq",
+    image: "https://survivordle.com/Big_Brotherdle_Thumbnail.png",
   });
 
   return (

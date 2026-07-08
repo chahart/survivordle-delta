@@ -102,6 +102,9 @@ export default function BBNavBar({ lightMode, onToggleLight, colorblind, onToggl
           <NavLink to="/bb/faq" className={({ isActive }) => `nav-secondary-link${isActive ? " active" : ""}`}>
             FAQ
           </NavLink>
+          <NavLink to="/about" className={({ isActive }) => `nav-secondary-link${isActive ? " active" : ""}`}>
+            About
+          </NavLink>
           <NavLink to="/privacy" className={({ isActive }) => `nav-secondary-link${isActive ? " active" : ""}`}>
             Privacy
           </NavLink>
@@ -122,6 +125,9 @@ export default function BBNavBar({ lightMode, onToggleLight, colorblind, onToggl
               </NavLink>
               <NavLink to="/bb/faq" className={({ isActive }) => `nav-more-item${isActive ? " active" : ""}`}>
                 FAQ
+              </NavLink>
+              <NavLink to="/about" className={({ isActive }) => `nav-more-item${isActive ? " active" : ""}`}>
+                About
               </NavLink>
               <NavLink to="/privacy" className={({ isActive }) => `nav-more-item${isActive ? " active" : ""}`}>
                 Privacy

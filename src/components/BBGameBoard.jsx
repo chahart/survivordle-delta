@@ -17,6 +17,9 @@ export default function BBGameBoard({
   initialGaveUp,
   onShowStats,
   onNavigateStats,
+  onNavigateRecall,
+  onNavigateSandwich,
+  onNavigateHome,
   colorblind,
   onMidGame,
   initialHintEpisode,
@@ -309,6 +312,21 @@ export default function BBGameBoard({
             {onNavigateStats && (
               <button className="share-btn" onClick={onNavigateStats}>
                 📊 Stats
+              </button>
+            )}
+            {onNavigateRecall && (
+              <button className="share-btn" onClick={onNavigateRecall}>
+                🔑 Recall
+              </button>
+            )}
+            {onNavigateSandwich && (
+              <button className="share-btn" onClick={onNavigateSandwich}>
+                🥪 Sandwich
+              </button>
+            )}
+            {onNavigateHome && (
+              <button className="share-btn" onClick={onNavigateHome}>
+                🔥 Survivordle
               </button>
             )}
           </div>

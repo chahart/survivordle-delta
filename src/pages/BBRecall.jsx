@@ -299,7 +299,10 @@ function FlipResults({
             </button>
           )}
           <button className="share-btn" onClick={() => navigate("/bb")}>
-            🏠 Home
+            👁 Daily
+          </button>
+          <button className="share-btn" onClick={() => navigate("/bb/sandwich")}>
+            🥪 Sandwich
           </button>
         </div>
         {isDaily && (
@@ -849,6 +852,7 @@ export default function BBRecall({ colorblind }) {
     title: "Big Brotherdle Recall: Name the Houseguest's Stats",
     description: "The reverse of Big Brotherdle: you see the houseguest's name, you recall their stats from memory.",
     canonical: "https://survivordle.com/bb/recall",
+    image: "https://survivordle.com/Big_Brotherdle_Thumbnail.png",
   });
 
   useEffect(() => {
