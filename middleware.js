@@ -5,8 +5,59 @@ export const config = {
 const BB_TITLE = "Big Brotherdle: Daily Big Brother Houseguest Guessing Game";
 const BB_DESCRIPTION = "Guess the Big Brother houseguest in 8 tries. New puzzle every day: match by season, comp wins, placement, age, and more!";
 
+// bigbrotherdle.com normally 301s to survivordle.com (see vercel.json / domain settings).
+// That redirect is invisible to real browsers but breaks most link-preview crawlers, which
+// either don't follow cross-domain redirects or key the preview to the pasted URL. So for
+// the two URLs people actually share — the bare domain and /bb — serve a tiny same-origin
+// page with correct OG tags + an instant client-side redirect, instead of letting the
+// redirect fire. Every other bigbrotherdle.com/* path is untouched (falls through below).
+function bigBrotherdleRedirectPage() {
+  const target = "https://survivordle.com/bb";
+  const image = "https://bigbrotherdle.com/Big_Brotherdle_Thumbnail.png";
+
+  const html = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${BB_TITLE}</title>
+    <meta name="description" content="${BB_DESCRIPTION}" />
+    <link rel="canonical" href="${target}" />
+
+    <meta property="og:title" content="${BB_TITLE}" />
+    <meta property="og:description" content="${BB_DESCRIPTION}" />
+    <meta property="og:url" content="${target}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="${image}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${BB_TITLE}" />
+    <meta name="twitter:description" content="${BB_DESCRIPTION}" />
+    <meta name="twitter:image" content="${image}" />
+
+    <meta http-equiv="refresh" content="0; url=${target}" />
+    <script>window.location.replace(${JSON.stringify(target)});</script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="${target}">${target}</a>&hellip;</p>
+  </body>
+</html>`;
+
+  return new Response(html, {
+    status: 200,
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
+}
+
 export default async function middleware(request) {
   const url = new URL(request.url);
+
+  const host = url.hostname.replace(/^www\./, "");
+  const isBBDomainShareLink = host === "bigbrotherdle.com" && (url.pathname === "/" || url.pathname === "/bb");
+  if (isBBDomainShareLink) {
+    return bigBrotherdleRedirectPage();
+  }
+
   const isBB = url.pathname === "/bb" || url.pathname.startsWith("/bb/");
   if (!isBB) return;
 
