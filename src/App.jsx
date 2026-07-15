@@ -22,6 +22,7 @@ import BBRecall from "./pages/BBRecall";
 import BBSandwich from "./pages/BBSandwich";
 import BBHowToPlay from "./pages/BBHowToPlay";
 import BBFAQ from "./pages/BBFAQ";
+import BBStats from "./pages/BBStats";
 import { AnnouncementModal, BBAnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
@@ -166,7 +167,7 @@ export default function App() {
             <Route path="/bb"           element={<BB colorblind={colorblind} />} />
             <Route path="/bb/archive"   element={<BB colorblind={colorblind} />} />
             <Route path="/bb/unlimited" element={<BB colorblind={colorblind} />} />
-            <Route path="/bb/stats"     element={<BB colorblind={colorblind} />} />
+            <Route path="/bb/stats"     element={<BBStats />} />
             <Route path="/bb/recall"           element={<BBRecall colorblind={colorblind} />} />
             <Route path="/bb/recall/archive"   element={<BBRecall colorblind={colorblind} />} />
             <Route path="/bb/recall/unlimited" element={<BBRecall colorblind={colorblind} />} />

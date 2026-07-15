@@ -214,7 +214,7 @@
    "day": 13,
    "result": "9th voted out",
    "juryTier": "Non-Jury",
-   "placedBefore": "Dee Vallardes",
+   "placedBefore": "Dee Valladares",
    "placedAfter": "Genevieve Mushaluk",
    "showName": "Colby",
    "tribe_color": "Magenta"
@@ -222,7 +222,7 @@
  {
    "id": "US0666_50",
    "castaway_id": "US0666",
-   "name": "Dee Vallardes",
+   "name": "Dee Valladares",
    "season": 50,
    "seasonName": "In the Hands of the Fans",
    "seasonNameFull": "Survivor: In the Hands of the Fans",
@@ -259,7 +259,7 @@
    "result": "11th voted out",
    "juryTier": "Jury",
    "placedBefore": "Benjamin Wade",
-   "placedAfter": "Dee Vallardes",
+   "placedAfter": "Dee Valladares",
    "showName": "Chrissy",
    "tribe_color": "Blue/Teal"
  },
@@ -19004,7 +19004,7 @@
    "juryTier": "Jury",
    "placedBefore": "Sean Rector",
    "placedAfter": "Tammy Leitner",
-   "showName": "Robert",
+   "showName": "General",
    "tribe_color": "Blue/Teal"
  },
  {

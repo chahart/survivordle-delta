@@ -7,8 +7,7 @@ import {
 } from "../shared/bbLogic";
 import {
   loadTodayBBGame, saveBBMidGame, saveBBCompletedGame,
-  loadBBStorage, saveBBStorage, loadBBStats,
-  loadBBUnlimitedStats, saveBBUnlimitedGame,
+  loadBBStorage, saveBBStorage, saveBBUnlimitedGame,
 } from "../shared/storage";
 import { msUntilMidnightET } from "../shared/gameLogic";
 import BBGameBoard from "../components/BBGameBoard";
@@ -358,72 +357,6 @@ function BBUnlimited({ contestants, colorblind }) {
   );
 }
 
-// ── Stats ──────────────────────────────────────────────────────────────────────
-function DistBars({ dist }) {
-  const max = Math.max(...Object.values(dist), 1);
-  return (
-    <>
-      <div className="sp-sub-title" style={{ marginTop: "20px" }}>Guess Distribution</div>
-      {Array.from({ length: BB_MAX_GUESSES }, (_, i) => i + 1).map(n => {
-        const count = dist[n] || 0;
-        const w = count > 0 ? `${Math.max(Math.round((count / max) * 100), 4)}%` : "0%";
-        return (
-          <div key={n} className="stat-row">
-            <span className="stat-label">{n}</span>
-            <div className="stat-bar-wrap">
-              <div className="stat-bar" style={{ width: w, background: "#0a2a5a", border: "1px solid #4a8aff" }}>
-                {count > 0 && <span className="stat-bar-count">{count}</span>}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </>
-  );
-}
-
-function StatsSection({ stats, label, showStreak }) {
-  const winPct = stats.played ? Math.round((stats.wins / stats.played) * 100) : 0;
-  const cells = showStreak
-    ? [[stats.played, "Played"], [`${winPct}%`, "Win %"], [stats.currentStreak, "Streak"], [stats.maxStreak, "Max Streak"]]
-    : [[stats.played, "Played"], [`${winPct}%`, "Win %"], [stats.wins, "Wins"], [stats.played - stats.wins, "Losses"]];
-
-  return (
-    <div style={{ marginBottom: "32px" }}>
-      <div className="sp-sub-title">{label}</div>
-      {stats.played === 0 ? (
-        <p style={{ textAlign: "center", color: "var(--text3)", fontSize: "13px", marginTop: "12px" }}>
-          No games yet
-        </p>
-      ) : (
-        <>
-          <div className="stats-grid" style={{ marginTop: "12px", marginBottom: "12px" }}>
-            {cells.map(([val, lbl]) => (
-              <div className="stats-grid-item" key={lbl}>
-                <span className="stats-grid-num">{val}</span>
-                <span className="stats-grid-label">{lbl}</span>
-              </div>
-            ))}
-          </div>
-          <DistBars dist={stats.dist || {}} />
-        </>
-      )}
-    </div>
-  );
-}
-
-function BBStats() {
-  const daily = loadBBStats();
-  const unlimited = loadBBUnlimitedStats();
-
-  return (
-    <div>
-      <StatsSection stats={daily} label="Daily" showStreak />
-      <StatsSection stats={unlimited} label="Unlimited" />
-    </div>
-  );
-}
-
 // ── "How to play" info popover ─────────────────────────────────────────────────
 function BBInfoPopover() {
   const [open, setOpen] = useState(false);
@@ -515,7 +448,6 @@ export default function BB({ colorblind }) {
   const path = location.pathname.replace(/\/$/, "");
   const activeTab = path === "/bb/archive"   ? "archive"
                   : path === "/bb/unlimited" ? "unlimited"
-                  : path === "/bb/stats"     ? "stats"
                   : "daily";
 
   if (loading) return (
@@ -544,7 +476,6 @@ export default function BB({ colorblind }) {
       {activeTab === "daily"     && <BBDaily     contestants={houseguests} colorblind={colorblind} />}
       {activeTab === "archive"   && <BBArchive   contestants={houseguests} colorblind={colorblind} />}
       {activeTab === "unlimited" && <BBUnlimited contestants={houseguests} colorblind={colorblind} />}
-      {activeTab === "stats"     && <BBStats />}
     </>
   );
 }
