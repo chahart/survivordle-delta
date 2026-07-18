@@ -2916,7 +2916,7 @@
    "seasonNameFull": "Big Brother 11",
    "placement": 1,
    "gender": "Female",
-   "returnee": false,
+   "returnee": true,
    "weekOut": 10,
    "juryTier": "Winner",
    "placedBefore": "",
@@ -3538,8 +3538,8 @@
    "placedBefore": "Porsche Briggs",
    "placedAfter": "Jordan Lloyd",
    "HOH_wins": 1,
-   "POV_wins": 1,
-   "COMP_wins": 2
+   "POV_wins": 2,
+   "COMP_wins": 3
  },
  {
    "id": "BB119_13",
@@ -8024,7 +8024,7 @@
    "weekOut": 2,
    "juryTier": "Non-Jury",
    "placedBefore": "Hisam Goueli",
-   "placedAfter": "Kirsen Elwin",
+   "placedAfter": "Kirsten Elwin",
    "HOH_wins": 1,
    "POV_wins": 0,
    "COMP_wins": 1
@@ -8032,8 +8032,8 @@
  {
    "id": "BB320_25",
    "houseguest_id": "BB320",
-   "name": "Kirsen Elwin",
-   "showName": "Kirsen",
+   "name": "Kirsten Elwin",
+   "showName": "Kirsten",
    "age": 25,
    "result": "Evicted",
    "day": 9,
@@ -8067,7 +8067,7 @@
    "returnee": false,
    "weekOut": 1,
    "juryTier": "Non-Jury",
-   "placedBefore": "Kirsen Elwin",
+   "placedBefore": "Kirsten Elwin",
    "placedAfter": "",
    "HOH_wins": 0,
    "POV_wins": 0,
