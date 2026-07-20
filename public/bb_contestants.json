@@ -3004,7 +3004,7 @@
    "seasonNameFull": "Big Brother 11",
    "placement": 5,
    "gender": "Male",
-   "returnee": false,
+   "returnee": true,
    "weekOut": 8,
    "juryTier": "Jury",
    "placedBefore": "Michele Noonan",
